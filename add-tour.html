@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+    
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Add Tour</title>
+    
+        <link rel="icon" type="image/png" href="/static/images/wactop-fav-4.png">
+    
+        <!-- Bootstrap Css -->
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <!-- <link rel="stylesheet" href="assets/css/fontawesome.min.css"> -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+        <!-- Css files -->
+        <link rel="stylesheet" href="/static/css/reset.css">
+        <link rel="stylesheet" href="/static/css/organizer-page.css">
+        <link rel="stylesheet" href="/static/css/responsive-latest.css">
+    
+        
+    </head>
+
+<body>
+    <style>
+        .loginBtn, .registerBtn,.logout{
+            color: #febd69;
+            transition: color .2s ease-in-out;
+        }
+        .loginBtn:hover, .registerBtn:hover,.logout:hover{
+            color: #ccc;
+        }
+        .register-modal .register-link{
+            width: 90%;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            text-decoration: none !important;
+          }
+          .register-modal .register-link:hover{
+            color: rgb(49, 49, 49);
+          }
+    
+          .login-modal .form-input{
+            height: 50px;
+            padding: 5px 10px;
+          }
+    
+          .login-modal .login_btn{
+            border-radius: 10px;
+            width: 100%;
+            padding: 10px 0;
+          }
+    
+          .modal-dialog{
+            max-width: 550px;
+          }
+    
+          .login-modal .social-login a{
+            border-radius: 10px;
+            padding: 10px 0;
+            margin-bottom: 10px;
+          }
+          .header-left-bottom{
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          #notification-bell{
+              width: 50%;
+              height: auto;
+    
+          }
+          #notification-box{
+            width: 300px;
+          }
+          .user-profile .fa-bell{
+                margin-left: 15px;
+                border-left: 1px solid;
+                padding-left: 10px;
+                font-size: 18px;
+            }
+            .user-profile:hover .header-menu{
+                display: flex;
+                flex-direction: column;
+            }
+    </style>
+    <header id="header">
+        <div class="container-fluid">
+            <div class="row justify-content-between mr-0 ml-0">
+                <div class="left">
+                    <button type="button" class="menu_btn menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <a href="/">
+                        <img src="/static/images/wactop.png" width="180px" class="wactop-logo" alt="">
+                    </a>
+                </div>
+                <div class="align-center">
+                    
+                        <div class="user-profile">
+                            <div class="d-flex justify-content-center align-center">
+                                
+                                    <img src="/static/images/profile.png" alt="">
+                                
+                                <span class="ml-2">ruhinshukurlu <i class="fas fa-angle-down"></i></span>
+                            </div>
+                            <div class="header-menu">
+                                <nav>
+                                    <ul class="d-column mb-0"> 
+                                         
+                                        
+                                            <li>
+                                                <a href="/organizer/1">We Travel</a>
+                                            </li>
+                                            <li>
+                                                <a href="/organizer/profile">Organizer Settings</a>
+                                            </li>
+                                        
+                                        <li>
+                                            <a href="/account/change_password/">Change Password</a>
+                                        </li>
+                                        <li>
+                                            <a href="/account/user/2/update">Account Details</a>
+                                        </li>
+                                        <li>
+                                            <a href="/account/logout">Sign Out</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        
+                            <div class="user-profile">
+                                <div class="d-flex justify-content-center align-center">
+                                    <i class="far fa-bell"></i>
+                                </div>
+                                <div class="header-menu" id="notification-box">
+                                    
+                                        <img src="/static/images/animat-bell-color.gif" id="notification-bell" class="m-auto" alt="">
+                                        <p class="bold text-center" style="color: #000;">Nothing to see here, you’re all caught up!</p>
+                                    
+                                </div>
+                            </div>
+                        
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="menu-box" style="display: none;"></div>
+    <div class="menu-box-in" style="display: none;">
+        <div class="menu-box-in-head">
+            <img src="/static/images/tour-list/wactop-logo.png" width="150px" alt="">
+            <button class="close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="menu-box-in-body">
+            <nav>
+                <ul class="main-menu-list">
+                    <li><a href="/tour/">Tours</a></li>
+                    <li><a href="/activity/">Activities</a></li>
+                    <li><a href="/training/">Trainings</a></li>
+                    <li><a href="/organizer/list/">Organizer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <main>
+        <div class="row justify-content-center p-relative">
+
+            <div class="col-xl-3 p-0" id="menu-column">
+                <nav class="organizer-menu bg-white full-h shadow" id="org-menu-nav">
+                    <ul class="d-column">
+                        <li>
+                            <a href="/organizer/1">
+                                <div class="align-center">
+                                    <i class="fas fa-home"></i>
+                                    <span style="display: none;">We Travel</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/organizer/profile">
+                                <div class="align-center">
+                                    <i class="fas fa-cog"></i>
+                                    <span style="display: none;">Organizer Settings</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/organizer/add/tour">
+                                <div class="align-center">
+                                    <i class="fas fa-directions"></i>
+                                    <span style="display: none;">Add Tour</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/organizer/add/training">
+                                <div class="align-center">
+                                    <i class="fas fa-running"></i>
+                                    <span style="display: none;">Add Training</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/organizer/add/activity">
+                                <div class="align-center">
+                                    <i class="fas fa-hiking"></i>
+                                    <span style="display: none;">Add Activity</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/organizer/edit/1">
+                                <div class="align-center">
+                                    <i class="fas fa-user-edit"></i>
+                                    <span style="display: none;">Edit Informations</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/organizer/photos">
+                                <div class="align-center">
+                                    <i class="fas fa-camera-retro"></i>
+                                    <span style="display: none;">Photos</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/organizer/actions">
+                                <div class="align-center">
+                                    <i class="fas fa-history"></i>
+                                    <span style="display: none;">Torus, Activities, Trainings</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/organizer/guides-instructors">
+                                <div class="align-center">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                    <span style="display: none;">Guides &amp; Instructors</span>
+                                </div>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </nav>
+                <button type="button" id="organizer-menu-btn">
+                    <i class="fas fa-angle-right"></i>
+                </button>
+            </div>
+            <div class="col-xl-11">
+                <div class="custom-container mt-5 mb-5">
+                    <div class="">
+                        <div class="row">
+                            <div class="col-12 col-xl-3">
+                                <button type="button" class="mb-3 full form-steps-btn">
+                                    All Steps of Form
+                                    <i class="fas fa-chevron-down ml-1"></i>
+                                </button>
+                                <nav class="full tour-menu-list-nav">
+                                    <ul class="full tour-menu-list d-column" id="formControlMenu">
+                                        <li data-target="tourBasics">
+                                            <div class="number">1</div>
+                                            <span>Tour Basics</span>
+                                        </li>
+                                        <li data-target="tourDescription">
+                                            <div class="number">2</div>
+                                            <span>Tour Descriptions</span>
+                                        </li>
+                                        <li data-target="tourURL">
+                                            <div class="number">3</div>
+                                            <span>Tour URL</span>
+                                        </li>
+                                        <li data-target="tourPhotos">
+                                            <div class="number">4</div>
+                                            <span>Tour Photos</span>
+                                        </li>
+                                        <li data-target="tourSchedules">
+                                            <div class="number">5</div>
+                                            <span>Tour Schedules</span>
+                                        </li>
+                                        <li data-target="tourSave">
+                                            <div class="number">6</div>
+                                            <span>Save Tour</span>
+                                        </li>
+                                    </ul>
+
+                                </nav>
+                            </div>
+                            <div class="col-12 col-xl-9">
+                                <form method="post" enctype="multipart/form-data" id="addTourForm">
+
+                                    <div id="tourBasics">
+                                        <div class="d-column border-bottom pb-2 mb-4">
+                                            <h3 class="full bold ">
+                                                Let's start adding new Tour
+                                            </h3>
+                                            <span>First you have to write basic information about your new tour
+                                                :)</span>
+                                        </div>
+
+                                        <div class="form-box">
+                                            <div class="form-group row p-relative" style="margin-bottom: 80px;">
+                                                <!-- Tour Cover Photo -->
+                                                <div class="d-flex add-img-box cover-img-box">
+                                                    <label for="coverPhotoInput"><i class="fas fa-camera mr-2"></i>Cover
+                                                        Photo</label>
+                                                    <input type="file" name="avatar" id="profilePhotoExample"
+                                                        accept="image/*">
+
+                                                </div>
+                                                <img id="coverPhoto" class="cover-photo"
+                                                    src="/static/images/activity-cover.jpg" alt="your image">
+
+                                                <!-- Tour Profile Photo -->
+                                                <div class="tour-profile-photo">
+                                                    <div class="p-relative">
+                                                        <div class="d-flex add-img-box profile-img-box bg-black-custom">
+                                                            <label for="profilePhotoExample">
+                                                                <i class="fas fa-camera"></i>
+                                                            </label>
+                                                            <input type="file" name="cover" id="coverPhotoInput"
+                                                                accept="image/*">
+
+                                                        </div>
+                                                        <img id="profilePhoto" class="profile-photo"
+                                                            src="/static/images/activity-profile.jpg"
+                                                            alt="your image">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-3">
+                                                    <label for="id_title">Tour Title:</label>
+                                                </div>
+                                                <div class="col-9">
+                                                    <input type="text" name="title" class="form-input"
+                                                        placeholder="Enter Title" required="" id="id_title">
+                                                    <ul>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-3">
+                                                    <label for="id_country">Country:</label>
+                                                </div>
+                                                <div class="col-9">
+                                                    <input type="text" name="country" class="form-input"
+                                                        placeholder="Country..." required="" id="id_country">
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-3">
+                                                    <label for="id_city">City:</label>
+                                                </div>
+                                                <div class="col-9">
+                                                    <input type="text" name="city" class="form-input"
+                                                        placeholder="City..." required="" id="id_city">
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-3">
+                                                    <label for="id_address">Address:</label>
+                                                </div>
+                                                <div class="col-9">
+                                                    <input type="text" name="address" class="form-input"
+                                                        placeholder="Address" maxlength="63" id="id_address">
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-3">
+                                                    <label for="id_tour_type">Tour type:</label>
+                                                </div>
+                                                <div class="col-9">
+                                                    <select name="tour_type" class="custom-select" required=""
+                                                        id="id_tour_type">
+                                                        <option value="" selected="">---------</option>
+
+                                                        <option value="1">Hiking</option>
+
+                                                    </select>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-3">
+                                                    <label for="id_pricefor">Pricefor:</label>
+                                                </div>
+                                                <div class="col-9">
+                                                    <input type="number" name="pricefor" value="1" class="form-input"
+                                                        placeholder="Price for..." required="" id="id_pricefor">
+
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="" class="col-3">Price &amp; Currency</label>
+                                                <div class="col-9">
+                                                    <div class="full row">
+                                                        <div class="col-6 pl-0">
+                                                            <input type="number" name="price" class="form-input"
+                                                                placeholder="Price..." required="" id="id_price">
+
+                                                        </div>
+                                                        <div class="col-6 pr-0">
+                                                            <select name="currency" class="custom-select"
+                                                                id="id_currency">
+                                                                <option value="AZN" selected="">AZN</option>
+
+                                                                <option value="USD">USD</option>
+
+                                                                <option value="EUR">EUR</option>
+
+                                                                <option value="TRY">TRY</option>
+
+                                                                <option value="RUB">RUB</option>
+
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="" class="col-3">Trip is offered</label>
+                                                <div class="col-9">
+                                                    <div class="full row">
+                                                        <div class="col-12 p-0">
+                                                            <select name="trip_date" id="trip_date"
+                                                                class="custom-select">
+                                                                <option value="one_time">One Time</option>
+                                                                <option value="all_year">All Year</option>
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-5" id="start-end-date-box">
+                                                <label for="" class="col-3">Start &amp; End Date (Required)</label>
+                                                <div class="col-9 ">
+                                                    <div class="full row">
+                                                        <div class="col-6 pl-0">
+                                                            <input type="date" name="datefrom" class="form-input"
+                                                                required="" id="id_datefrom">
+
+                                                        </div>
+                                                        <div class="col-6 pr-0">
+                                                            <input type="date" name="dateto" class="form-input"
+                                                                required="" id="id_dateto">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-3">
+                                                    <label for="id_guide">Guide:</label>
+                                                </div>
+                                                <div class="col-9">
+                                                    <input type="text" name="guide" class="form-input"
+                                                        placeholder="Who is tour guide?" required="" id="id_guide">
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-3 ">
+                                                    <label for="id_map_link">Map Link:</label>
+                                                </div>
+                                                <div class="col-9 d-column">
+                                                    <div class="d-flex">
+                                                        <button type="button" class="help-btn mr-2">
+                                                            <i class="far fa-question-circle"></i>
+                                                        </button>
+                                                        <div class="d-column full">
+                                                            <input type="text" class="form-input"
+                                                                placeholder="Add Map iframe here" id="id_map_link">
+                                                            <div class="d-column pt-2" id="iframe-link-box"
+                                                                style="display: none;">
+                                                                <span>We got the link successfully</span>
+                                                            </div>
+                                                            <div style="display: none;">
+                                                                <input type="url" name="map_link" class="form-input"
+                                                                    placeholder="Add Map link here" maxlength="300"
+                                                                    id="id_map_link">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="help-text mt-1" style="display: none;">
+                                                        This field will make your tour address more clear to users, you
+                                                        have to include embeded iframe from <a
+                                                            href="https://www.google.com/maps/d/u/0/">Google My Map</a>.
+                                                        We automatically will get main link of iframe for presenting
+                                                        address in Google map.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex full justify-content-end">
+                                                <button type="button" class="btn btn-outline-success pr-4 pl-4 next_btn"
+                                                    data-target="tourDescription">
+                                                    Next
+                                                    <i class="fas fa-angle-double-right ml-1"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="tourDescription" style="display: none;">
+                                        <div class="d-column border-bottom pb-2 mb-4">
+                                            <h3 class="full bold ">
+                                                In this form you can write more information about your tour
+                                            </h3>
+                                            <span>Click "Add new Paragraph", if you need to add more paragraph.</span>
+                                        </div>
+                                        <div class="form-box mb-3">
+
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <label for="id_descriptionen">Tour Description in Engilsh:</label>
+                                                </div>
+                                                <div class="col-12">
+                                                    <textarea name="descriptionen" cols="40" rows="5" class="form-input"
+                                                        placeholder="Enter short description about tour..." required=""
+                                                        id="id_descriptionen"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div id="text-forms-en">
+
+                                                <div class="form-group row">
+                                                    <div class="col-12">
+                                                        <label for="id_form-0-title_en">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-0-title_en"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-0-title_en">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-0-text_en" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-0-text_en"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-1-title_en">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-1-title_en"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-1-title_en">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-1-text_en" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-1-text_en"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-2-title_en">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-2-title_en"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-2-title_en">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-2-text_en" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-2-text_en"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-3-title_en">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-3-title_en"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-3-title_en">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-3-text_en" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-3-text_en"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-4-title_en">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-4-title_en"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-4-title_en">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-4-text_en" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-4-text_en"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-5-title_en">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-5-title_en"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-5-title_en">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-5-text_en" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-5-text_en"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-6-title_en">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-6-title_en"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-6-title_en">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-6-text_en" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-6-text_en"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-7-title_en">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-7-title_en"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-7-title_en">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-7-text_en" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-7-text_en"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-8-title_en">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-8-title_en"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-8-title_en">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-8-text_en" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-8-text_en"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-9-title_en">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-9-title_en"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-9-title_en">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-9-text_en" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-9-text_en"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group justify-content-end d-flex">
+                                                <button type="button" class="add_detail_btn" onclick="adddetail_en()"
+                                                    style="outline: none;">
+                                                    <i class="fas fa-plus-circle mr-2"></i>
+                                                    Add new Paragraph
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-box mb-3">
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <label for="id_descriptionaz">Tour Description in
+                                                        Azerbaijan:</label>
+                                                </div>
+                                                <div class="col-12">
+                                                    <textarea name="descriptionaz" cols="40" rows="5" class="form-input"
+                                                        placeholder="Enter short description about tour..." required=""
+                                                        id="id_descriptionaz"></textarea>
+
+                                                </div>
+                                            </div>
+
+                                            <div id="text-forms-az">
+
+                                                <div class="form-group row">
+                                                    <div class="col-12">
+                                                        <label for="id_form-0-title_az">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-0-title_az"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-0-title_az">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-0-text_az" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-0-text_az"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-1-title_az">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-1-title_az"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-1-title_az">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-1-text_az" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-1-text_az"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-2-title_az">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-2-title_az"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-2-title_az">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-2-text_az" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-2-text_az"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-3-title_az">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-3-title_az"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-3-title_az">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-3-text_az" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-3-text_az"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-4-title_az">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-4-title_az"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-4-title_az">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-4-text_az" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-4-text_az"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-5-title_az">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-5-title_az"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-5-title_az">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-5-text_az" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-5-text_az"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-6-title_az">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-6-title_az"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-6-title_az">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-6-text_az" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-6-text_az"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-7-title_az">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-7-title_az"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-7-title_az">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-7-text_az" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-7-text_az"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-8-title_az">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-8-title_az"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-8-title_az">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-8-text_az" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-8-text_az"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-9-title_az">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-9-title_az"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-9-title_az">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-9-text_az" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-9-text_az"></textarea>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group justify-content-end d-flex">
+                                                <button type="button" class="add_detail_btn" onclick="adddetail_az()"
+                                                    style="outline: none;">
+                                                    <i class="fas fa-plus-circle mr-2"></i>
+                                                    Add new Paragraph
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-box">
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <label for="id_descriptionru">Tour Description in Russia:</label>
+                                                </div>
+                                                <div class="col-12">
+                                                    <textarea name="descriptionru" cols="40" rows="5" class="form-input"
+                                                        placeholder="Enter short description about tour..." required=""
+                                                        id="id_descriptionru"></textarea>
+
+                                                </div>
+                                            </div>
+
+                                            <div id="text-forms-ru">
+
+                                                <div class="form-group row">
+                                                    <div class="col-12">
+                                                        <label for="id_form-0-title_ru">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-0-title_ru"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-0-title_ru">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-0-text_ru" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-0-text_ru"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-1-title_ru">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-1-title_ru"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-1-title_ru">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-1-text_ru" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-1-text_ru"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-2-title_ru">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-2-title_ru"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-2-title_ru">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-2-text_ru" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-2-text_ru"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-3-title_ru">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-3-title_ru"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-3-title_ru">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-3-text_ru" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-3-text_ru"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-4-title_ru">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-4-title_ru"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-4-title_ru">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-4-text_ru" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-4-text_ru"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-5-title_ru">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-5-title_ru"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-5-title_ru">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-5-text_ru" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-5-text_ru"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-6-title_ru">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-6-title_ru"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-6-title_ru">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-6-text_ru" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-6-text_ru"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-7-title_ru">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-7-title_ru"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-7-title_ru">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-7-text_ru" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-7-text_ru"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-8-title_ru">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-8-title_ru"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-8-title_ru">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-8-text_ru" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-8-text_ru"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row" style="display: none;">
+                                                    <div class="col-12">
+                                                        <label for="id_form-9-title_ru">Tour Paragraph:</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="form-9-title_ru"
+                                                            class="form-input mb-2" placeholder="Enter Paragraph Title"
+                                                            id="id_form-9-title_ru">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea name="form-9-text_ru" cols="40" rows="5"
+                                                            class="form-input mb-2"
+                                                            placeholder="Enter your custom paragraph here..."
+                                                            id="id_form-9-text_ru"></textarea>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group justify-content-end d-flex">
+                                                <button type="button" class="add_detail_btn" onclick="adddetail_ru()"
+                                                    style="outline: none;">
+                                                    <i class="fas fa-plus-circle mr-2"></i>
+                                                    Add new Paragraph
+                                                </button>
+                                            </div>
+                                            <div class="d-flex full justify-content-end">
+                                                <button type="button" class="btn btn-outline-success pr-4 pl-4 next_btn"
+                                                    data-target="tourURL">
+                                                    Next
+                                                    <i class="fas fa-angle-double-right ml-1"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+
+                                    <div id="tourURL" style="display: none;">
+                                        <div class="d-column border-bottom pb-2 mb-4">
+                                            <h3 class="full bold ">
+                                                In this form you can add Links related to your tour
+                                            </h3>
+                                            <span>Click "Add new Paragraph", if you need to add more paragraph.</span>
+                                        </div>
+
+                                        <div class="form-box mb-3" id="urls">
+
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <input type="url" name="form-0-url" class="form-input"
+                                                        placeholder="Add URL here" maxlength="200" id="id_form-0-url">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <input type="url" name="form-1-url" class="form-input"
+                                                        placeholder="Add URL here" maxlength="200" id="id_form-1-url">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <input type="url" name="form-2-url" class="form-input"
+                                                        placeholder="Add URL here" maxlength="200" id="id_form-2-url">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row" style="visibility: hidden;">
+                                                <div class="col-12">
+                                                    <input type="url" name="form-3-url" class="form-input"
+                                                        placeholder="Add URL here" maxlength="200" id="id_form-3-url">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row" style="visibility: hidden;">
+                                                <div class="col-12">
+                                                    <input type="url" name="form-4-url" class="form-input"
+                                                        placeholder="Add URL here" maxlength="200" id="id_form-4-url">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row" style="visibility: hidden;">
+                                                <div class="col-12">
+                                                    <input type="url" name="form-5-url" class="form-input"
+                                                        placeholder="Add URL here" maxlength="200" id="id_form-5-url">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row" style="visibility: hidden;">
+                                                <div class="col-12">
+                                                    <input type="url" name="form-6-url" class="form-input"
+                                                        placeholder="Add URL here" maxlength="200" id="id_form-6-url">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row" style="visibility: hidden;">
+                                                <div class="col-12">
+                                                    <input type="url" name="form-7-url" class="form-input"
+                                                        placeholder="Add URL here" maxlength="200" id="id_form-7-url">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row" style="visibility: hidden;">
+                                                <div class="col-12">
+                                                    <input type="url" name="form-8-url" class="form-input"
+                                                        placeholder="Add URL here" maxlength="200" id="id_form-8-url">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row" style="visibility: hidden;">
+                                                <div class="col-12">
+                                                    <input type="url" name="form-9-url" class="form-input"
+                                                        placeholder="Add URL here" maxlength="200" id="id_form-9-url">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-2 justify-content-end d-flex">
+                                                <button type="button" class="add_detail_btn" onclick="addurl()"
+                                                    style="outline: none;">
+                                                    <i class="fas fa-plus-circle mr-2"></i>
+                                                    Add new URL
+                                                </button>
+                                            </div>
+                                            <div class="d-flex full justify-content-end mt-3">
+                                                <button type="button" class="btn btn-outline-success pr-4 pl-4 next_btn"
+                                                    data-target="tourPhotos">
+                                                    Next
+                                                    <i class="fas fa-angle-double-right ml-1"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div id="tourPhotos" style="display: none;">
+                                        <div class="d-column border-bottom pb-2 mb-4">
+                                            <h3 class="full bold ">
+                                                Add Tour Photos using this form
+                                            </h3>
+                                            <span>Click "Add another Photo", if you need to add more photos (limit is
+                                                10)</span>
+                                        </div>
+
+                                        <div class="form-box">
+                                            <div class="photos-box row" id="photo-form-box">
+
+                                                <div class="photo-item col-6 col-sm-4 col-lg-3">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="id_form-0-image">Select Photo:</label>
+                                                        <input type="file" name="form-0-image" class="photo-input"
+                                                            id="id_form-0-image">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="photo-item col-6 col-sm-4 col-lg-3"
+                                                    style="visibility: hidden;">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="id_form-1-image">Select Photo:</label>
+                                                        <input type="file" name="form-1-image" class="photo-input"
+                                                            id="id_form-1-image">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="photo-item col-6 col-sm-4 col-lg-3"
+                                                    style="visibility: hidden;">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="id_form-2-image">Select Photo:</label>
+                                                        <input type="file" name="form-2-image" class="photo-input"
+                                                            id="id_form-2-image">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="photo-item col-6 col-sm-4 col-lg-3"
+                                                    style="visibility: hidden;">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="id_form-3-image">Select Photo:</label>
+                                                        <input type="file" name="form-3-image" class="photo-input"
+                                                            id="id_form-3-image">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="photo-item col-6 col-sm-4 col-lg-3"
+                                                    style="visibility: hidden;">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="id_form-4-image">Select Photo:</label>
+                                                        <input type="file" name="form-4-image" class="photo-input"
+                                                            id="id_form-4-image">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="photo-item col-6 col-sm-4 col-lg-3"
+                                                    style="visibility: hidden;">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="id_form-5-image">Select Photo:</label>
+                                                        <input type="file" name="form-5-image" class="photo-input"
+                                                            id="id_form-5-image">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="photo-item col-6 col-sm-4 col-lg-3"
+                                                    style="visibility: hidden;">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="id_form-6-image">Select Photo:</label>
+                                                        <input type="file" name="form-6-image" class="photo-input"
+                                                            id="id_form-6-image">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="photo-item col-6 col-sm-4 col-lg-3"
+                                                    style="visibility: hidden;">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="id_form-7-image">Select Photo:</label>
+                                                        <input type="file" name="form-7-image" class="photo-input"
+                                                            id="id_form-7-image">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="photo-item col-6 col-sm-4 col-lg-3"
+                                                    style="visibility: hidden;">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="id_form-8-image">Select Photo:</label>
+                                                        <input type="file" name="form-8-image" class="photo-input"
+                                                            id="id_form-8-image">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="photo-item col-6 col-sm-4 col-lg-3"
+                                                    style="visibility: hidden;">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="id_form-9-image">Select Photo:</label>
+                                                        <input type="file" name="form-9-image" class="photo-input"
+                                                            id="id_form-9-image">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group d-flex justify-content-end">
+                                                <button type="button" class="add_detail_btn" onclick="addPhoto()"
+                                                    style="outline: none;">
+                                                    <i class="fas fa-plus-circle mr-2"></i>
+                                                    Add another Photo
+                                                </button>
+                                            </div>
+                                            <div class="d-flex full justify-content-end">
+                                                <button type="button" class="btn btn-outline-success pr-4 pl-4 next_btn"
+                                                    data-target="tourSchedules">
+                                                    Next
+                                                    <i class="fas fa-angle-double-right ml-1"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="tourSchedules" style="display: none;">
+                                        <div class="d-column border-bottom pb-2 mb-4">
+                                            <h3 class="full bold ">
+                                                Add Tour Schedules using this form
+                                            </h3>
+                                            <span>Click "Add another Schedule", if you need to add more schedules (limit
+                                                is 10)</span>
+                                        </div>
+                                        <div class="form-box">
+                                            <div class="photos-box row" id="schedule-form-box">
+
+                                                <div class="photo-item schedule-item col-6 col-sm-4 col-lg-3">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="schedule-input-0">Select Schedule:</label>
+                                                        <input type="file" name="form-0-schedule_image"
+                                                            class="schedule-input" id="schedule-input-0">
+                                                    </div>
+                                                </div>
+
+                                                <div class="photo-item schedule-item col-6 col-sm-4 col-lg-3"
+                                                    style="visibility: hidden;">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="schedule-input-1">Select Schedule:</label>
+                                                        <input type="file" name="form-1-schedule_image"
+                                                            class="schedule-input" id="schedule-input-1">
+                                                    </div>
+                                                </div>
+
+                                                <div class="photo-item schedule-item col-6 col-sm-4 col-lg-3"
+                                                    style="visibility: hidden;">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="schedule-input-2">Select Schedule:</label>
+                                                        <input type="file" name="form-2-schedule_image"
+                                                            class="schedule-input" id="schedule-input-2">
+                                                    </div>
+                                                </div>
+
+                                                <div class="photo-item schedule-item col-6 col-sm-4 col-lg-3"
+                                                    style="visibility: hidden;">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="schedule-input-3">Select Schedule:</label>
+                                                        <input type="file" name="form-3-schedule_image"
+                                                            class="schedule-input" id="schedule-input-3">
+                                                    </div>
+                                                </div>
+
+                                                <div class="photo-item schedule-item col-6 col-sm-4 col-lg-3"
+                                                    style="visibility: hidden;">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="schedule-input-4">Select Schedule:</label>
+                                                        <input type="file" name="form-4-schedule_image"
+                                                            class="schedule-input" id="schedule-input-4">
+                                                    </div>
+                                                </div>
+
+                                                <div class="photo-item schedule-item col-6 col-sm-4 col-lg-3"
+                                                    style="visibility: hidden;">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="schedule-input-5">Select Schedule:</label>
+                                                        <input type="file" name="form-5-schedule_image"
+                                                            class="schedule-input" id="schedule-input-5">
+                                                    </div>
+                                                </div>
+
+                                                <div class="photo-item schedule-item col-6 col-sm-4 col-lg-3"
+                                                    style="visibility: hidden;">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="schedule-input-6">Select Schedule:</label>
+                                                        <input type="file" name="form-6-schedule_image"
+                                                            class="schedule-input" id="schedule-input-6">
+                                                    </div>
+                                                </div>
+
+                                                <div class="photo-item schedule-item col-6 col-sm-4 col-lg-3"
+                                                    style="visibility: hidden;">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="schedule-input-7">Select Schedule:</label>
+                                                        <input type="file" name="form-7-schedule_image"
+                                                            class="schedule-input" id="schedule-input-7">
+                                                    </div>
+                                                </div>
+
+                                                <div class="photo-item schedule-item col-6 col-sm-4 col-lg-3"
+                                                    style="visibility: hidden;">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="schedule-input-8">Select Schedule:</label>
+                                                        <input type="file" name="form-8-schedule_image"
+                                                            class="schedule-input" id="schedule-input-8">
+                                                    </div>
+                                                </div>
+
+                                                <div class="photo-item schedule-item col-6 col-sm-4 col-lg-3"
+                                                    style="visibility: hidden;">
+                                                    <img src="/static/images/default.png" alt="">
+                                                    <div class="d-flex add-img-box">
+                                                        <label for="schedule-input-9">Select Schedule:</label>
+                                                        <input type="file" name="form-9-schedule_image"
+                                                            class="schedule-input" id="schedule-input-9">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group d-flex justify-content-end">
+                                                <button type="button" class="add_detail_btn" onclick="addSchedule()"
+                                                    style="outline: none;">
+                                                    <i class="fas fa-plus-circle mr-2"></i>
+                                                    Add another Schedule
+                                                </button>
+                                            </div>
+                                            <div class="d-flex full justify-content-end">
+                                                <button type="button" class="btn btn-outline-success pr-4 pl-4 next_btn"
+                                                    data-target="tourSave">
+                                                    Next
+                                                    <i class="fas fa-angle-double-right ml-1"></i>
+                                                </button>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div id="tourSave" style="display: none;">
+                                        <div class="form-box shadow align-center" style="min-height: 300px;">
+                                            <img src="/static/images/note.svg" alt="" class="tour-complete-icon">
+                                            <div class="d-column full justify-content-center">
+                                                <h3 class="full border-bottom pb-2 mb-3 bold">
+                                                    Save Tour
+                                                </h3>
+                                                <p>
+                                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                                    Perspiciatis suscipit quidem quo ducimus
+                                                    autem non, quia molestiae accusamus laudantium
+                                                    soluta ipsam ea fuga itaque! Quia repellat eos corrupti. Cum,
+                                                    facilis.
+                                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                                    Perspiciatis suscipit quidem quo ducimus
+                                                    autem non, quia molestiae accusamus laudantium
+                                                    soluta ipsam ea fuga itaque! Quia repellat eos corrupti. Cum,
+                                                    facilis.
+                                                </p>
+                                                <input type="submit" value="Save Tour"
+                                                    class="btn btn-outline-success pl-5 pr-5">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4">
+                    <nav class="footer-menu">
+                        <ul class="d-column">
+                            <li>
+                                <a href="/about/">About Us</a>
+                            </li>
+                            <li>
+                                <a href="/terms/">Terms</a>
+                            </li>
+                            <li>
+                                <a href="/privacies/">Privacy</a>
+                            </li>
+                        </ul>
+                        <p><i class="far fa-copyright"></i> 2021</p>
+                    </nav>
+                </div>
+                <div class="col-4">
+                    <div class="d-column align-center">
+                        <span class="mb-2 mt-2">Follow Us</span>
+                        <ul class="footer-social-links">
+                            <li>
+                                <a href="#">
+                                    <i class="fab fa-facebook-square"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-4 d-flex justify-content-end">
+                    <a href="/contact/">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="static/js/jquery-latest.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/organizer.js"></script>
+
+
+    <script>
+
+
+        // Photo and schedule input labels were same, that is why I have to add one of them manually
+        var schedule_label_list = $('#schedule-form-box').find('label')
+        var schedule_input_list = $('#schedule-form-box').find('.schedule-input')
+
+        for (var i = 0; i < schedule_label_list.length; i++) {
+            $(schedule_label_list[i]).attr('for', `schedule-input-${i}`)
+            $(schedule_input_list[i]).attr('id', `schedule-input-${i}`)
+        }
+
+
+        // Function to assign selected photo to particular img tag
+        function readURL(input, place) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $(place).attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+        $('.photo-input').change(function () {
+            console.log('okkk-tour');
+            var photo = $(this).parents('.photo-item').find('img')
+            readURL(this, $(photo));
+        })
+
+        $('.schedule-input').change(function () {
+            console.log('okkk-schedule');
+            var schedule = $(this).parent('.add-img-box').siblings('img')
+            console.log(schedule);
+            readURL(this, $(schedule));
+        })
+
+
+        $("#profilePhotoExample").change(function () {
+            readURL(this, $('#profilePhoto'));
+        });
+
+        $("#coverPhotoInput").change(function () {
+            readURL(this, $('#coverPhoto'));
+        });
+    </script>
+
+
+
+
+
+
+</body>
+
+</html>
